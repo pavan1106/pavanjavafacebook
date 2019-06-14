@@ -1,0 +1,33 @@
+<div>
+    <p>
+        One of the great powers of pull requests is that anyone with read access to a repository can fork it, commit
+        some changes to their fork and then create a pull request against the original repository with their changes.
+        There are some files stored in source control that are important. For example, a <code>Jenkinsfile</code>
+        may contain configuration details to sandbox pull requests in order to mitigate against malicious pull requests.
+        In order to protect against a malicious pull request itself modifying the <code>Jenkinsfile</code> to remove
+        the protections, you can define the trust policy for pull requests from forks.
+    </p>
+    <p>
+        Other plugins can extend the available trust policies. The default policies are:
+    </p>
+    <dl>
+        <dt>Nobody</dt>
+        <dd>
+            Pull requests from forks will all be treated as untrusted. This means that where Jenkins requires a
+            trusted file (e.g. <code>Jenkinsfile</code>) the contents of that file will be retrieved from the
+            target branch on the origin repository and not from the pull request branch on the fork repository.
+        </dd>
+        <dt>Forks in the same account</dt>
+        <dd>
+            Bitbucket allows for a repository to be forked into a "sibling" repository in the same account but using
+            a different name. This strategy will trust any pull requests from forks that are in the same account as
+            the target repository on the basis that users have to have been granted write permission to account in
+            order create such a fork.
+        </dd>
+        <dt>Everyone</dt>
+        <dd>
+            All pull requests from forks will be treated as trusted. <strong>NOTE:</strong> this option can be dangerous
+            if used on a public repository hosted on Bitbucket Cloud.
+        </dd>
+    </dl>
+</div>
